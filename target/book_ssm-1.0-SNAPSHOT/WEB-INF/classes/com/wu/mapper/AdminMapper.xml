@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wu.mapper.AdminMapper">
+    <select id="getAdmin" resultType="com.wu.pojo.Admin">
+        select * from ssm.admin
+        where name = #{name} and password = #{password}
+    </select>
+    <select id="login" resultType="Admin" parameterType="String">
+        select ssm.admin.id,ssm.admin.name,ssm.admin.password from
+        ssm.admin where ssm.admin.id = #{ssm.admin.id} and ssm.admin.name =#{ssm.admin.name} and ssm.admin.password=#{ssm.admin.password}
+    </select>
+    <!-- 查询是否存在用户 -->
+    <select id="findAdminBynameAndPassword"  resultType="com.wu.pojo.Admin" parameterType="string">
+        select * from ssm.admin where name = #{name} and password = #{password}
+    </select>
+    <!-- 根据用户名查询用户 -->
+    <select id="findAdminById"  resultType="com.wu.pojo.Admin" parameterType="string">
+        select * from ssm.admin where name = #{name}
+    </select>
+
+
+    <select id="getAdminList"  parameterType="map" resultType="Admin">
+        select ssm.admin.name,ssm.admin.password from ssm.admin where name=#{name} and password = #{password}
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="addAdmin" parameterType="Admin">
+        insert into ssm.admin(id,name, password) value (#{id},#{name},#{password})
+    </insert>
+</mapper>
